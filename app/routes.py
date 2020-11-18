@@ -56,3 +56,16 @@ def post():
         flash('Post Submitted')
         return redirect(url_for('index'))
     return render_template('post.html', form=form)
+
+
+@app.route('/admin-panel', methods=['GET', 'POST'])
+@login_required
+def admin_panel():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data,
+                    body=form.body.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+    posts = Post.query.order_by(Post.create_date.desc()).all()
+    return render_template('admin_panel.html', posts=posts, form=form)

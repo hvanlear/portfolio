@@ -38,6 +38,7 @@ nosetests.xml
 venv
 app.db
 portfolio.log*
+dbc.py
 
 # IPython
 profile_default/
