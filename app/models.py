@@ -27,8 +27,8 @@ class Post(db.Model):
     __tablename__ = 'posts'
 
     id = db.Column(db.Integer, primary_key=True)
-    heading = db.Column(db.String(100), nullable=False)
-    post = db.Column(db.String(15000), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
+    body = db.Column(db.String(15000), nullable=False)
     update_date = db.Column(
         db.DateTime, default=datetime.utcnow, nullable=False)
     create_date = db.Column(

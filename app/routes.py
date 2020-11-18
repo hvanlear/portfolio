@@ -1,15 +1,16 @@
 from flask import render_template, url_for, redirect, flash, request
-from app import app
-from app.forms import LoginForm
+from app import app, db
+from app.forms import LoginForm, PostForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Post
 from werkzeug.urls import url_parse
 
 
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', title='Home')
+    posts = Post.query.order_by(Post.create_date.desc()).limit(2).all()
+    return render_template('index.html', title='Home', posts=posts)
 
 
 @app.route('/login-admin', methods=['GET', 'POST'])
@@ -40,8 +41,18 @@ def logout():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
-    return render_template('user.html', user=user, posts=posts)
+    return render_template('user.html', user=user)
+
+
+@app.route('/post', methods=['GET', 'POST'])
+@login_required
+def post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data,
+                    body=form.body.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Post Submitted')
+        return redirect(url_for('index'))
+    return render_template('post.html', form=form)

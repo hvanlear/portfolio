@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="container col-md-9 mt-4">
-  <h1 class="display-4 justify-content-center">Hello!</h1>
+  <h1 class="display-4">Hello!</h1>
   <p class="lead">My name is <b>Hunter Van Lear</b>, thank you so much for taking time out of your <span class = 'tod'></span> <span class ='timeEmoji' style="font-size: 22px"></span> to visit my
     site </p>
 
@@ -23,13 +23,11 @@
         <h4>{{post.title}}</h4>
         {% for tag in post.tags %}
         <p class="lead">
-          <a href="/tags/{{ tag.id }}" class="badge badge-primary"
-            >{{tag.name}}</a
-          >
+          <a href="/tags/{{ tag.id }}" class="badge badge-primary">{{tag.name}}</a>
         </p>
         {% endfor %}
-        <p><i>{{ post.friendly_date }} </i></p>
-        <p class="text-muted">- {{ post.user.handle}}</p>
+        <p><i>{{ post.create_date }} </i></p>
+        <p class="text-muted">- {{ post.author.username}}</p>
       </div>
     </div>
     {% endfor %}
