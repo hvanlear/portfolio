@@ -12,6 +12,11 @@ html {
   font-family: "Inter";
 }
 
+p {
+  font-size: 20px;
+  line-height: 1.6;
+}
+
 .devicon {
   font-size: 30px;
 }
