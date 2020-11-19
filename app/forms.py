@@ -16,3 +16,11 @@ class PostForm(FlaskForm):
     body = CKEditorField('Write something')
     tags = StringField('Tags')
     submit = SubmitField('Submit')
+
+
+class EditPost(FlaskForm):
+    title = StringField('Title', validators=[
+        InputRequired(), Length(max=100)])
+    body = CKEditorField('Write something')
+    tags = StringField('Tags')
+    submit = SubmitField('Submit')

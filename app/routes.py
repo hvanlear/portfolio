@@ -1,6 +1,6 @@
 from flask import render_template, url_for, redirect, flash, request
 from app import app, db
-from app.forms import LoginForm, PostForm
+from app.forms import LoginForm, PostForm, EditPost
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Post
 from werkzeug.urls import url_parse
@@ -36,26 +36,21 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-
-@app.route('/user/<username>')
-@login_required
-def user(username):
-    user = User.query.filter_by(username=username).first_or_404()
-    return render_template('user.html', user=user)
+# route is undeed, functionality rolled into /admin-panel
 
 
-@app.route('/post', methods=['GET', 'POST'])
-@login_required
-def post():
-    form = PostForm()
-    if form.validate_on_submit():
-        post = Post(title=form.title.data,
-                    body=form.body.data, author=current_user)
-        db.session.add(post)
-        db.session.commit()
-        flash('Post Submitted')
-        return redirect(url_for('index'))
-    return render_template('post.html', form=form)
+# @app.route('/post', methods=['GET', 'POST'])
+# @login_required
+# def post():
+#     form = PostForm()
+#     if form.validate_on_submit():
+#         post = Post(title=form.title.data,
+#                     body=form.body.data, author=current_user)
+#         db.session.add(post)
+#         db.session.commit()
+#         flash('Post Submitted')
+#         return redirect(url_for('index'))
+#     return render_template('post.html', form=form)
 
 
 @app.route('/admin-panel', methods=['GET', 'POST'])
@@ -67,5 +62,42 @@ def admin_panel():
                     body=form.body.data, author=current_user)
         db.session.add(post)
         db.session.commit()
+        flash('Post Submitted')
+        return redirect(url_for('admin_panel'))
     posts = Post.query.order_by(Post.create_date.desc()).all()
     return render_template('admin_panel.html', posts=posts, form=form)
+
+
+@app.route('/admin-panel/<int:post_id>', methods=['GET', 'POST'])
+@login_required
+def edit_post(post_id):
+
+    post = Post.query.get(post_id)
+    if post is None:
+        flash('No Such Post')
+        return redirect(url_for('index'))
+
+    form = EditPost()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.body = form.body.data
+        db.session.add(post)
+        db.session.commit()
+        flash('post updated')
+        return redirect(url_for('admin_panel'))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.body.data = post.body
+    return render_template('edit_post.html', form=form, post=post)
+
+
+@app.route('/admin-panel/delete/<int:post_id>', methods=['GET', 'POST'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.get(post_id)
+    if post is None:
+        flash('No Such Post')
+        return redirect(url_for('index'))
+    db.session.delete(post)
+    db.session.commit()
+    return redirect(url_for('admin_panel'))

@@ -19,3 +19,7 @@ html {
 .card-body {
   padding: 0;
 }
+
+#title {
+  width: 1000px;
+}
