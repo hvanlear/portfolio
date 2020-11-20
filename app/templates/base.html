@@ -16,10 +16,15 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css"
     />
+    <link rel="stylesheet" href="https://use.typekit.net/smb2swj.css">
+
+
+
+
     <title>{{ title }} - HVL</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container mt-2">
       <ul class="nav justify-content-center mr-5">
 
         <li class="nav-item">
@@ -47,6 +52,7 @@
             <a class="nav-link" href="{{ url_for('admin_panel') }}">Admin</a>
         </li>
         {% endif %}
+        
       </ul>
       {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -57,7 +63,13 @@
       </ul>
       {% endif %}
       {% endwith %}
-      <main>{% block content %}CONTENT HERE{% endblock %}</main>
+      
+      <main>
+        
+        {% block content %}CONTENT HERE{% endblock %}
+      
+      </main>
+      <div class="container">
       <ul class="nav justify-content-center mb-3">
         <li class="nav-item">
           <a class="nav-link" href="https://github.com/hvanlear">
@@ -75,6 +87,7 @@
           ></a>
         </li>
       </ul>
+    </div>
     </div>
   </body>
 </html>

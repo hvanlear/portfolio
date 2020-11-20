@@ -1,7 +1,12 @@
 {% extends 'base.html' %} {% block content %}
 
-<div class="container col-md-9 mt-4">
-  <h1 class="display-4">Hello!</h1>
+
+
+
+
+<div class="container col-md-9 mt-3">
+  <hr class="line">
+  <h1 class="display-4">Welcome</h1>
   <p>My name is <b>Hunter Van Lear</b>, thank you so much for taking time out of your <span class = 'tod'></span> <span class ='timeEmoji' style="font-size: 22px"></span> to visit my
     site </p>
 
@@ -13,7 +18,7 @@
     
   </p>
 </div>
-<hr class="my-4" />
+<hr class="my-4"/>
 <div class="container col-md-9">
   <h3 class="display-7">Recent Posts</h3>
   <ul>
@@ -35,16 +40,60 @@
 </div>
 <div class="container col-md-9">
   <h3 class="display-7">Projects</h3>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card mt-1">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card mt-1">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 </div>
 <footer>
   <div class="container col-md-9">
-    <h3 class="display-7 mb-3">Contact</h3>
+    <h3 class="display-7 mb-2 mt2">Contact</h3>
     <p>
       I'd love to get in touch. The abolute best way to reach out would be
       through email - <i>hvanlear@gmail.com</i>. You can also find me elsehwere
       on the internet via the links below
     </p>
+    <hr class="line">
   </div>
+
 </footer>
 <script src="{{ url_for('static', filename="js/greeting.js") }}"></script>
 {% endblock %}

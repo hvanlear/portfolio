@@ -25,6 +25,20 @@ p {
   padding: 0;
 }
 
-#title {
-  width: 1000px;
+h1,
+h3 {
+  letter-spacing: 2px;
+  font-family: matrix-ii, serif;
+}
+
+.line {
+  background-color: #f5c936;
+}
+
+.nav-link {
+  color: #00a896;
+}
+
+ul {
+  padding-left: 0;
 }
