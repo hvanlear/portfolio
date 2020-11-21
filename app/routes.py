@@ -13,6 +13,12 @@ def index():
     return render_template('index.html', title='Home', posts=posts)
 
 
+@app.route('/blog')
+def show_all_posts():
+    posts = Post.query.all()
+    return render_template('blog.html', posts=posts)
+
+
 @app.route('/login-admin', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:

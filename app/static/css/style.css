@@ -15,6 +15,7 @@ html {
 p {
   font-size: 20px;
   line-height: 1.6;
+  font-weight: 200;
 }
 
 .devicon {
@@ -26,9 +27,18 @@ p {
 }
 
 h1,
-h3 {
+h3,
+h4 {
   letter-spacing: 2px;
   font-family: matrix-ii, serif;
+}
+
+ul {
+  padding-left: 0;
+}
+
+.postTitle {
+  font-family: "Inter";
 }
 
 .line {
@@ -39,6 +49,11 @@ h3 {
   color: #00a896;
 }
 
-ul {
-  padding-left: 0;
+.devicon-svg {
+  max-width: 2em;
+}
+
+/* if you want to change the original color */
+.devicon-svg path {
+  fill: #4691f6;
 }

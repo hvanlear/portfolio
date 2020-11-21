@@ -6,34 +6,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename="css/style.css") }}" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.2/darkly/bootstrap.min.css"
-    />
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.2/darkly/bootstrap.min.css"/>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css"
-    />
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
     <link rel="stylesheet" href="https://use.typekit.net/smb2swj.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename="css/devicon-master/devicon.css") }}" />
 
-
-
-
-    <title>{{ title }} - HVL</title>
+    <title> HVL - {{ title }} </title>
   </head>
   <body>
     <div class="container mt-2">
+
       <ul class="nav justify-content-center mr-5">
 
         <li class="nav-item">
+
             <a class="nav-link active" href="{{ url_for('index') }}">Home</a> 
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link active" href="#">Blog</a>
-        </li>
 
         <li class="nav-item">
             <a class="nav-link" href="#">Projects</a>
@@ -68,23 +59,19 @@
         
         {% block content %}CONTENT HERE{% endblock %}
       
+
       </main>
       <div class="container">
-      <ul class="nav justify-content-center mb-3">
+          <ul class="nav justify-content-center mr-5">
+
         <li class="nav-item">
-          <a class="nav-link" href="https://github.com/hvanlear">
-            <i class="devicon devicon-github-plain"></i
-          ></a>
+          <a class="nav-link" href="https://github.com/hvanlear"><i class="devicon devicon-github-original"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"
-            ><i class="devicon devicon-twitter-plain"></i
-          ></a>
+          <a class="nav-link" href="#"><i class="devicon devicon-twitter-original"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"
-            ><i class="devicon devicon-linkedin-plain"></i
-          ></a>
+          <a class="nav-link" href="#"><i class="devicon devicon-linkedin-plain"></i></a>
         </li>
       </ul>
     </div>

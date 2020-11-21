@@ -6,7 +6,8 @@
 
 <div class="container col-md-9 mt-3">
   <hr class="line">
-  <h1 class="display-4">Welcome</h1>
+  <h1 class="display-4 headline">Welcome</h1>
+  
   <p>My name is <b>Hunter Van Lear</b>, thank you so much for taking time out of your <span class = 'tod'></span> <span class ='timeEmoji' style="font-size: 22px"></span> to visit my
     site </p>
 
@@ -25,7 +26,7 @@
     {% for post in posts%}
     <div class="card mb-1">
       <div class="card-body">
-        <h4>{{post.title}}</h4>
+        <h4 class="postTitle">{{post.title}}</h4>
         {% for tag in post.tags %}
         <p class="lead">
           <a href="/tags/{{ tag.id }}" class="badge badge-primary">{{tag.name}}</a>
