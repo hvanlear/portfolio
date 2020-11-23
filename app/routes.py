@@ -19,6 +19,11 @@ def show_all_posts():
     return render_template('blog.html', posts=posts)
 
 
+@app.route('/about')
+def show_about():
+    return render_template('about.html', title='Me')
+
+
 @app.route('/login-admin', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
