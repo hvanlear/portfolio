@@ -24,3 +24,13 @@ class EditPost(FlaskForm):
     body = CKEditorField('Write something')
     tags = StringField('Tags')
     submit = SubmitField('Submit')
+
+
+class AddProject(FlaskForm):
+    title = StringField('Title', validators=[
+        InputRequired(), Length(max=100)])
+    about = CKEditorField('Write something')
+    tags = StringField('Tags')
+    demo_link = StringField('Live Demo Link')
+    github_link = StringField('Github Link')
+    submit = SubmitField('Submit')

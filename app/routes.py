@@ -1,8 +1,8 @@
 from flask import render_template, url_for, redirect, flash, request
 from app import app, db
-from app.forms import LoginForm, PostForm, EditPost
+from app.forms import LoginForm, PostForm, EditPost, AddProject
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Post
+from app.models import User, Post, Post_Project_Tag, Project, Tag
 from werkzeug.urls import url_parse
 
 
@@ -10,7 +10,8 @@ from werkzeug.urls import url_parse
 @app.route('/index')
 def index():
     posts = Post.query.order_by(Post.create_date.desc()).limit(2).all()
-    return render_template('index.html', title='Home', posts=posts)
+    projects = Project.query.all()
+    return render_template('index.html', title='Home', posts=posts, projects=projects)
 
 
 @app.route('/blog')
@@ -47,7 +48,7 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-# route is undeed, functionality rolled into /admin-panel
+# route not needed, functionality rolled into /admin-panel
 
 
 # @app.route('/post', methods=['GET', 'POST'])
@@ -112,3 +113,17 @@ def delete_post(post_id):
     db.session.delete(post)
     db.session.commit()
     return redirect(url_for('admin_panel'))
+
+
+@app.route('/admin-panel/add-project', methods=['GET', 'POST'])
+@login_required
+def add_project():
+    form = AddProject()
+    if form.validate_on_submit():
+        project = Project(title=form.title.data,
+                          about=form.about.data, demo_link=form.demo_link.data, github_link=form.github_link.data)
+        db.session.add(project)
+        db.session.commit()
+        flash('Project Added')
+        return redirect(url_for('admin_panel'))
+    return render_template('add_project.html', form=form)

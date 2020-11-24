@@ -35,22 +35,38 @@ class Post(db.Model):
         db.DateTime, default=datetime.utcnow, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     tags = db.relationship(
-        'Tag', secondary='post_tag', backref='posts')
+        'Tag', secondary='post_project_tag', backref='posts')
 
 
-class PostTag(db.Model):
-    __tablename__ = 'post_tag'
+class Post_Project_Tag(db.Model):
+    __tablename__ = 'post_project_tag'
+
     post_id = db.Column(db.Integer, db.ForeignKey(
         'posts.id'), primary_key=True)
+    project_id = db.Column(db.Integer, db.ForeignKey(
+        'projects.id'), primary_key=True)
     tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)
 
 
 class Tag(db.Model):
     __tablename__ = 'tags'
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(15), nullable=False)
 
 
-@login.user_loader
+class Project(db.Model):
+    __tablename__ = 'projects'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(100), nullable=False)
+    about = db.Column(db.String(1000), nullable=False)
+    demo_link = db.Column(db.String(150), nullable=True)
+    github_link = db.Column(db.String(150), nullable=True)
+    tags = db.relationship(
+        'Tag', secondary='post_project_tag', backref='projects')
+
+
+@ login.user_loader
 def load_user(id):
     return User.query.get(int(id))
