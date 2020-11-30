@@ -1,3 +1,7 @@
+/* Base Colors:  */
+/* #00a896
+#f5c936 */
+
 @import url("https://rsms.me/inter/inter.css");
 html {
   font-family: "Inter", sans-serif;
@@ -9,13 +13,20 @@ html {
 }
 
 * {
-  font-family: "Inter";
+  font-family: "Inter var", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 p {
-  font-size: 18px;
-  line-height: 1.6;
-  font-weight: 200;
+  font-size: 1.1rem;
+  line-height: 1.476;
+}
+
+.entry-content {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  letter-spacing: 0.4px;
+  font-weight: 100;
 }
 
 .devicon {
@@ -29,8 +40,8 @@ p {
 h1,
 h3,
 h4 {
-  letter-spacing: 2px;
-  font-family: matrix-ii, serif;
+  letter-spacing: 1px;
+  font-family: "Inter var", sans-serif;
 }
 
 .IndexPosts {
@@ -41,9 +52,46 @@ h4 {
   font-family: "Inter";
 }
 
+/* DIVIDER CSS */
+
 .line {
-  background-color: #f5c936;
+  background: linear-gradient(
+    to left,
+    #f5c936 calc(50% - 16px),
+    transparent calc(50% - 16px),
+    transparent calc(50% + 16px),
+    #f5c936 calc(50% + 16px)
+  );
+  background-color: transparent !important;
+  border: none;
+  height: 1px;
+  overflow: visible;
+  position: relative;
 }
+
+.line::before {
+  left: calc(50% - 0.5rem);
+}
+
+.line::after {
+  right: calc(50% - 0.5rem);
+}
+
+.line::before,
+.line::after {
+  background: #f5c936;
+  content: "";
+  display: block;
+  height: 1rem;
+  position: absolute;
+  top: calc(50% - 0.5rem);
+  transform: rotate(22.5deg);
+  width: 1px;
+}
+
+/* .line {
+  background-color: #f5c936;
+} */
 
 .nav-link {
   color: #00a896;
