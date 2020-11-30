@@ -26,7 +26,7 @@ class User(UserMixin, db.Model):
 class Post(db.Model):
     __tablename__ = 'posts'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(100), nullable=False)
     body = db.Column(db.String(15000), nullable=False)
     update_date = db.Column(
@@ -35,17 +35,15 @@ class Post(db.Model):
         db.DateTime, default=datetime.utcnow, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     tags = db.relationship(
-        'Tag', secondary='post_project_tag', backref='posts')
+        'Tag', secondary='post_tag', backref='posts')
 
 
-class Post_Project_Tag(db.Model):
-    __tablename__ = 'post_project_tag'
+class Post_Tag(db.Model):
+    __tablename__ = 'post_tag'
 
-    post_id = db.Column(db.Integer, db.ForeignKey(
-        'posts.id'), primary_key=True)
-    project_id = db.Column(db.Integer, db.ForeignKey(
-        'projects.id'), primary_key=True)
     tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)
+    post_id = db.Column(db.Integer, db.ForeignKey(
+        'posts.id'), nullable=False)
 
 
 class Tag(db.Model):
@@ -53,6 +51,14 @@ class Tag(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(15), nullable=False)
+
+
+class Project_Tag(db.Model):
+    __tablename__ = 'project_tag'
+
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)
+    project_id = db.Column(db.Integer, db.ForeignKey(
+        'projects.id'), nullable=False)
 
 
 class Project(db.Model):
@@ -64,7 +70,7 @@ class Project(db.Model):
     demo_link = db.Column(db.String(150), nullable=True)
     github_link = db.Column(db.String(150), nullable=True)
     tags = db.relationship(
-        'Tag', secondary='post_project_tag', backref='projects')
+        'Tag', secondary='project_tag', backref='projects')
 
 
 @ login.user_loader
