@@ -25,7 +25,7 @@ def show_about():
     return render_template('about.html', title='Me')
 
 
-@app.route('/login-admin', methods=['GET', 'POST'])
+@app.route('/admin-login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -34,7 +34,7 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
-            return redirect(url_for('login-admin'))
+            return redirect(url_for('admin-login'))
         login_user(user)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':

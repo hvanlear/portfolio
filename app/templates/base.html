@@ -15,33 +15,30 @@
 
     <title> HVL - {{ title }} </title>
   </head>
-  <body>
+  <body class='body'>
     <div class="container mt-2">
 
       <ul class="nav justify-content-center mr-5">
 
         <li class="nav-item">
 
-            <a class="nav-link active" href="{{ url_for('index') }}">Home</a> 
-        </li>
-
-
-        <li class="nav-item">
-            <a class="nav-link" href="#">Projects</a>
-        </li>
-
-
-
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('show_about') }}">About</a>
+            <a class="top-nav nav-link active" href="{{ url_for('index') }}">Home</a> 
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#">Blog</a>
+            <a class=" top-nav nav-link" href="#">Projects</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="top-nav nav-link" href="{{ url_for('show_about') }}">About</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="top-nav nav-link" href="#">Blog</a>
       </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="top-nav nav-link" href="#">Contact</a>
       </li>
 
         {% if current_user.is_anonymous %}
@@ -86,5 +83,6 @@
       </ul>
     </div>
     </div>
+
   </body>
 </html>

@@ -25,19 +25,19 @@
 
 
 <div class="container col-md-9">
-  <h2>Recent Posts</h2>
+  <h2 class= 'home-headline'>Recent Posts</h2>
   <hr class="line">
   <ul class = 'IndexPosts'>
     {% for post in posts %}
-    <div class="card mb-1">
-      <div class="card-body">
+    <div class=" card mb-1 mt-2">
+      <div class="post-card card-body">
         <h4 class="postTitle">{{post.title}}</h4>
         {% for tag in post.tags %}
         <p class="lead">
           <a href="/tags/{{ tag.id }}" class="badge badge-primary">{{tag.name}}</a>
         </p>
         {% endfor %}
-        <p><i>{{ post.create_date }} </i></p>
+        <p class='display-date'>{{ post.create_date }}</p>
         <p class="text-muted">- {{ post.author.username}}</p>
       </div>
     </div>
@@ -51,7 +51,7 @@
 </div> -->
 
 <div class="container col-md-9">
-  <h2>Projects</h2>
+  <h2 class = 'home-headline'>Projects</h2>
   <hr class="line">
   <div class="container-fluid">
     <legend></legend>
@@ -61,17 +61,15 @@
         <div class="row">
         {% endif %}
             <div class="col-sm-6">
-              <div class='card mt-4'>
+              <div class='card mt-2'>
                 <div class="card-body">
 
                   <h5 class="card-title project-title">{{ project.title }}</h5>
                   {% for tag in project.tags %}
-                  <p class="lead">
-                    <a href="/tags/{{ tag.id }}" class="badge badge-primary">{{tag.name}}</a>
-                  </p>
+                    <a href="/tags/{{ tag.id }}" class="tags">{{tag.name}}</a>
                   {% endfor %}
-                  <p class="entry-content card-text ">{{ project.about | safe}}</p>
-                  <a href="{{ project.github_link }}"><i class="devicon devicon-github-original"></i> Source</a>
+                  <p class="entry-content card-text project-about ">{{ project.about | safe}}</p>
+                  <a class="project-source-link" href="{{ project.github_link }}"><i class="devicon devicon-github-original"></i> Source</a>
                 
               </div>
               </div>
@@ -89,9 +87,9 @@
 
 <footer>
 
-  <div class="container col-md-9">
+  <div class="container col-md-9 mt-2">
     
-    <h2 class="display-7 mb-2 mt2">Contact</h2>
+    <h2 class="display-7 home-headline mb-2">Contact</h2>
     <hr class="line">
     <p class='entry-content'>
       I'd love to get in touch. The abolute best way to reach out would be
@@ -102,5 +100,7 @@
   </div>
 
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
 <script src="{{ url_for('static', filename="js/greeting.js") }}"></script>
+<script src="{{ url_for('static', filename="js/dateFormat.js") }}"></script>
 {% endblock %}
