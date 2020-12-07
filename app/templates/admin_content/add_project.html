@@ -21,6 +21,13 @@
         {{form.github_link}}<br>
     </p>
 
+    {% for choice in form.tags.choices %}
+    <p>
+        {{ choice.label }}
+        {{ choice }}
+    </p>
+    {% endfor %}
+
 
     <p>{{ form.submit() }}</p>
 </form>

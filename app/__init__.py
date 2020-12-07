@@ -6,13 +6,26 @@ from flask_login import LoginManager
 from flask_ckeditor import CKEditor
 
 
-app = Flask(__name__)
-app.config.from_object(Config)
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-login = LoginManager(app)
+
+
+db = SQLAlchemy()
+migrate = Migrate()
+login = LoginManager()
 login.login_view = 'login'
-ckeditor = CKEditor(app)
+ckeditor = CKEditor()
 
 
-from app import routes, models, errors  # nopep8
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(config_class)
+
+    with app.app_context():
+        db.init_app(app)
+        login.init_app(app)
+        migrate.init_app(app,db)
+        ckeditor.init_app(app)
+    
+        from app.admin_content import bp as admin_content_bp
+        app.register_blueprint(admin_content_bp, url_prefix='/admin')
+    
+    return app

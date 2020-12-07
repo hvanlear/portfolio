@@ -1,8 +1,8 @@
 from flask import render_template, url_for, redirect, flash, request
-from app import app, db
+from app import  db
 from app.forms import LoginForm, PostForm, EditPost, AddProject
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Post, Project, Tag
+from app.models import User, Post, Project, Tag, Project_Tag
 from werkzeug.urls import url_parse
 
 
@@ -118,7 +118,11 @@ def delete_post(post_id):
 @app.route('/admin-panel/add-project', methods=['GET', 'POST'])
 @login_required
 def add_project():
+
+
     form = AddProject()
+    form.tags.choices = [(t.id, t.name) for t in Tag.query.all()]
+ 
     if form.validate_on_submit():
         project = Project(title=form.title.data,
                           about=form.about.data, demo_link=form.demo_link.data, github_link=form.github_link.data)
@@ -127,3 +131,5 @@ def add_project():
         flash('Project Added')
         return redirect(url_for('admin_panel'))
     return render_template('add_project.html', form=form)
+
+
