@@ -43,10 +43,7 @@ def login():
     return render_template('login.html', title='Sign In', form=form)
 
 
-@app.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('index'))
+
 
 # route not needed, functionality rolled into /admin-panel
 
@@ -65,19 +62,7 @@ def logout():
 #     return render_template('post.html', form=form)
 
 
-@app.route('/admin-panel', methods=['GET', 'POST'])
-@login_required
-def admin_panel():
-    form = PostForm()
-    if form.validate_on_submit():
-        post = Post(title=form.title.data,
-                    body=form.body.data, author=current_user)
-        db.session.add(post)
-        db.session.commit()
-        flash('Post Submitted')
-        return redirect(url_for('admin_panel'))
-    posts = Post.query.order_by(Post.create_date.desc()).all()
-    return render_template('admin_panel.html', posts=posts, form=form)
+
 
 
 @app.route('/admin-panel/<int:post_id>', methods=['GET', 'POST'])

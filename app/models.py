@@ -1,4 +1,4 @@
-from app import db, login
+from app import db, login_manager
 from flask import current_app
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -76,13 +76,15 @@ class Tag(db.Model):
                                 lazy='dynamic',
                                 cascade='all, delete-orphan')
     
+    @classmethod
     def getTagid(self, tag_name):
         tag = Tag.query.filter_by(name=tag_name).first()
         if tag is None:
             return -1
         else:
             return tag.id
-    
+            
+    @classmethod
     def getTag(self, tag_id):
         return Tag.query.filter_by(id=tag_id).first()
 
@@ -107,6 +109,6 @@ class Project(db.Model):
         'Tag', secondary='project_tag', backref='projects')
 
 
-@ login.user_loader
+@login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
