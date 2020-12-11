@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Create new entry{% endblock %}
+
+{% block content_title %}Create new entry{% endblock %}
+
+{% block content %}
+
+
+<div class="warpper" style="width: 1000px; margin: auto">
+  
+    <form method="post">
+        {{ form.csrf_token }}
+        {{ form.title.label }}<br>
+        {{ form.title }}<br><br>
+        {{ form.body.label }}<br>
+        {{ form.body }}
+        {{ form.tags }}
+        <br>
+        {{ form.submit }}
+        <a class="btn" href="{{ url_for('blog.blog_index') }}">Cancel</a>
+    </form>
+</div>
+{{ ckeditor.load() }}
+{{ ckeditor.config(name='body') }}
+
+{% endblock %}

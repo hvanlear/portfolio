@@ -2,6 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectMultipleField, widgets, SelectField
 from flask_ckeditor import CKEditorField
 from wtforms.validators import DataRequired, InputRequired, Length
+from app.models import Tag
+
 
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[

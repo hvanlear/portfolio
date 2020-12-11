@@ -13,11 +13,12 @@ def index():
     projects = Project.query.all()
     return render_template('main/index.html', title='Home', posts=posts, projects=projects)
 
-
-@bp.route('/blog')
-def show_all_posts():
-    posts = Post.query.all()
-    return render_template('main/blog.html', posts=posts)
+@bp.route('/index/contact')
+def contact():
+    #must be a better way of doing this
+    posts = Post.query.order_by(Post.create_date.desc()).limit(2).all()
+    projects = Project.query.all()
+    return render_template('main/index.html',posts=posts, projects=projects, scrollToAnchor="contact_section" )
 
 
 @bp.route('/about')

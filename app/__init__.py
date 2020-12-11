@@ -1,9 +1,10 @@
-from flask import Flask
+from flask import Flask, request
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_ckeditor import CKEditor
+from config import Config
 
 
 
@@ -33,6 +34,9 @@ def create_app(config_class=Config):
 
         from app.auth import bp as auth_bp
         app.register_blueprint(auth_bp, url_prefix='/auth')
+
+        from app.blog import bp as blog_bp
+        app.register_blueprint(blog_bp, url_prefix='/blog')
 
         from app.admin_content import bp as admin_content_bp
         app.register_blueprint(admin_content_bp, url_prefix='/admin')

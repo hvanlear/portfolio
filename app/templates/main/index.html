@@ -1,41 +1,26 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
 
+{% block content_title %}Welcome{% endblock %}
 
-
+{% block content %}
 
 <div class="home-body">
-<div class=" container col-md-9 mt-3">
-  
-  <h1 class="display-4 headline">Welcome</h1>
-
-    <hr class="line">
-
-  <p class = 'entry-content'>My name is <b>Hunter Van Lear</b>, thank you so much for taking time out of your <span class = 'tod'></span> <span class ='timeEmoji' style="font-size: 22px"></span> to visit my
+  <p class = 'entry-content'>My name is <b>Hunter</b>, thank you so much for taking time out of your <span class = 'tod'></span> <span class ='timeEmoji' style="font-size: 22px"></span> to visit my
     site </p>
-
   <p class='entry-content'>
     I'm a Fullstack Web Developer from California, currently living in
     Emerald Isle N.C with my wife and two dogs. I designed this space as 
-    somewhere I can show off my work, discuss my trade and maybe make a few observations along the way.
-    
+    somewhere I can show off my work, discuss my trade and maybe make a few observations along the way. 
   </p>
 
-</div>
-
-
-
-<div class="container col-md-9">
-  <h2 class= 'home-headline'>Recent Posts</h2>
-  <hr class="line">
+  <h2 class= 'home-headline headline'>Recent Posts</h2>
   <ul class = 'IndexPosts'>
     {% for post in posts %}
     <div class=" card mb-1 mt-2">
       <div class="post-card card-body">
         <h4 class="postTitle">{{post.title}}</h4>
         {% for tag in post.tags %}
-        <p class="lead">
-          <a href="/tags/{{ tag.id }}" class="badge badge-primary">{{tag.name}}</a>
-        </p>
+          <a href="/tags/{{ tag.id }}" class="tags">{{tag.name}}</a>
         {% endfor %}
         <p class='display-date'>{{ post.create_date }}</p>
         <p class="text-muted">- {{ post.author.username}}</p>
@@ -44,15 +29,11 @@
     {% endfor %}
   </ul>
 
-</div>
-
 <!-- <div class="container col-md-9 mt-4 mb-4">
   <hr class="line">
 </div> -->
 
-<div class="container col-md-9">
-  <h2 class = 'home-headline'>Projects</h2>
-  <hr class="line">
+  <h2 class = 'home-headline headline'>Projects</h2>
   <div class="container-fluid">
     <legend></legend>
     <div class="row-fluid" id="main">
@@ -81,27 +62,26 @@
     </div>
   </div>
 
-</div>
-
-
-
 <footer>
-
-  <div class="container col-md-9 mt-2">
-    
-    <h2 class="display-7 home-headline mb-2">Contact</h2>
-    <hr class="line">
+    <a id= 'contact_section'></a>
+    <h2 class="display-7 home-headline headline mb-2">Contact</h2>
+  
     <p class='entry-content'>
       I'd love to get in touch. The abolute best way to reach out would be
       through email - <i>hvanlear@gmail.com</i>. You can also find me elsehwere
       on the internet -
     </p>
-    
-  </div>
-
 </footer>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
 <script src="{{ url_for('static', filename="js/greeting.js") }}"></script>
 <script src="{{ url_for('static', filename="js/dateFormat.js") }}"></script>
+{% if scrollToAnchor %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.location.hash = '#{{ scrollToAnchor }}';
+    });
+</script>
+{% endif %}
 {% endblock %}

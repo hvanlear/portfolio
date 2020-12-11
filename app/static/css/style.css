@@ -18,6 +18,10 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.body{
+  background-color: #0d1117;
+}
+
 img {
   filter: brightness(0.9) contrast(1.2);
 }
@@ -41,7 +45,9 @@ project-about {
 }
 
 .card {
-  background-color: rgba(48, 48, 48, 0.6) !important;
+  /* background-color: rgba(48, 48, 48, 0.6) !important; */
+  background-color: #161b22 !important;
+  border: 1px solid #6e7681 !important;
 }
 
 .card-body {
@@ -177,6 +183,7 @@ img {
   border-radius: 0.25rem;
   color: #ffcb47;
   letter-spacing: 1px;
+  text-decoration: underline;
 }
 
 .tags:hover {
@@ -187,31 +194,36 @@ img {
 /* ANIMATIONS */
 
 main {
-  animation: transitionLeft 0.75s;
+
+  animation: transitionIn 1s;
 }
 
 .headline {
+  animation-delay: 1s;
   animation: transitionLeft 1s;
 }
 
 @keyframes transitionIn {
   from{
     opacity: 0;
-    transform: rotateX(-10);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
-    transform: rotateX(0);
+    transform: translateY(0);
   }
 }
 
 @keyframes transitionLeft {
-  from {
-    opacity: 0;
-    transform: rotateY(-1);
+  0% {
+      opacity: 0;
+      transform: translateX(-5px);
   }
-  to {
-    opacity: 1;
-    transform: rotateY(0);
+  80% {
+      transform: translateX(3px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateX(0);
   }
 }

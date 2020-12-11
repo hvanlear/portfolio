@@ -3,7 +3,18 @@ from flask import current_app
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+import re
 
+
+def slugify(s):
+    return re.sub('[^\w]+', '-', s).lower()
+
+
+
+post_tags = db.Table('post_tags',
+    db.Column('tag_id', db.Integer, db.ForeignKey('tags.id')),
+    db.Column('post_id', db.Integer, db.ForeignKey('posts.id'))
+)
 
 
 class User(UserMixin, db.Model):
@@ -24,19 +35,12 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-class Post_Tag(db.Model):
-    __tablename__ = 'post_tag'
-
-    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)
-    post_id = db.Column(db.Integer, db.ForeignKey(
-        'posts.id'), nullable=False)
-
 
 class Post(db.Model):
     __tablename__ = 'posts'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    slug = db.Column(db.String(50), nullable=False)
+    slug = db.Column(db.String(50), nullable=False, unique=True)
     title = db.Column(db.String(100), nullable=False)
     body = db.Column(db.String(15000), nullable=False)
     update_date = db.Column(
@@ -44,49 +48,37 @@ class Post(db.Model):
     create_date = db.Column(
         db.DateTime, default=datetime.utcnow, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    tags = db.relationship('Post_Tag',foreign_keys=[Post_Tag.post_id], \
-                                    backref=db.backref('posts',lazy='joined'),
-                                    lazy='dynamic',
-                                    cascade='all, delete-orphan')
-    
-    def getPost(self, id):
-        return Post.query.filter(Post.id==id).first()
-    
-    def getPostBySlug(self, slug):
-        return Post.query.filter(Post.slug==slug).first()
-    
-        #return a list of tag names for this post
-    def getTagNames(self):
-        tags = Tag.query.filter(Tag.posts.any(post_id=self.id)).all()
-        return [tag.name for tag in tags]
 
-    #return a string of tag names for this post
-    def getTagNamesStr(self):
-        return ','.join(self.getTagNames())
+    tags = db.relationship('Tag', secondary=post_tags,
+        backref=db.backref('posts', lazy='dynamic'))
+    
+    def __init__(self, *args, **kwargs):
+        super(Post, self).__init__(*args, **kwargs)
+        self.generate_slug()
+
+    def generate_slug(self):
+        self.slug = ''
+        if self.title:
+            self.slug = slugify(self.title)
+
+    def __repr__(self):
+        return '<Entry %s>' % self.title
 
 
 
 class Tag(db.Model):
     __tablename__ = 'tags'
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(15), nullable=False)
-    posts = db.relationship('Post_Tag',foreign_keys=[Post_Tag.tag_id], \
-                                backref=db.backref('tags',lazy='joined'),
-                                lazy='dynamic',
-                                cascade='all, delete-orphan')
-    
-    @classmethod
-    def getTagid(self, tag_name):
-        tag = Tag.query.filter_by(name=tag_name).first()
-        if tag is None:
-            return -1
-        else:
-            return tag.id
-            
-    @classmethod
-    def getTag(self, tag_id):
-        return Tag.query.filter_by(id=tag_id).first()
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    slug = db.Column(db.String(64), unique=True)
+
+    def __init__(self, *args, **kwargs):
+        super(Tag, self).__init__(*args, **kwargs)
+        self.slug = slugify(self.name)
+
+    def __repr__(self):
+        return '<Tag %s>' % self.name
 
 
 class Project_Tag(db.Model):
