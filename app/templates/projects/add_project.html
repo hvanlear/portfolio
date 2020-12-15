@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Add Project</h1>
+<form action="" method="post" style="width: 1000px; margin: auto">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.title.label }}<br>
+        {{ form.title }}<br>
+    </p>
+    <p>
+        {{form.about.label}}<br>
+        {{form.about}}<br>
+    </p>
+    <p>
+        {{form.demo_link.label}}<br>
+        {{form.demo_link}}<br>
+    </p>
+    <p>
+        {{form.github_link.label}}<br>
+        {{form.github_link}}<br>
+    </p>
+    <p>
+    {{ form.tags.label }}<br>
+    {{ form.tags }}
+    </p>
+
+
+    <p>{{ form.submit() }}</p>
+</form>
+{{ ckeditor.load() }}
+{{ ckeditor.config(name='about') }}
+{{ ckeditor.config(allowedContent=True) }}
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Project Tags{% endblock %}
+
+{% block content_title %}Project Tags{% endblock %}
+
+{% block content %}
+
+
+<ul>
+    {% for tag in object_list.items %}
+        <li><a href="{{ url_for ('projects.project_tags_detail', slug=tag.slug) }}">{{ tag.name }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

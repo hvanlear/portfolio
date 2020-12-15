@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, flash, request
 from app import  db
 from app.main import bp
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Post, Project, Tag, Project_Tag
+from app.models import User, Post, Project, Tag
 from werkzeug.urls import url_parse
 
 

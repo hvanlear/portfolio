@@ -16,6 +16,13 @@ post_tags = db.Table('post_tags',
     db.Column('post_id', db.Integer, db.ForeignKey('posts.id'))
 )
 
+project_tags = db.Table('project_tags',
+    db.Column('tag_id', db.Integer, db.ForeignKey('tags.id')),
+    db.Column('project_id', db.Integer, db.ForeignKey('projects.id'))
+)
+
+
+
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -81,24 +88,30 @@ class Tag(db.Model):
         return '<Tag %s>' % self.name
 
 
-class Project_Tag(db.Model):
-    __tablename__ = 'project_tag'
-
-    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)
-    project_id = db.Column(db.Integer, db.ForeignKey(
-        'projects.id'), nullable=False)
-
-
 class Project(db.Model):
     __tablename__ = 'projects'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(100), nullable=False)
+    slug = db.Column(db.String(50), nullable=False, unique=True)
     about = db.Column(db.String(1000), nullable=False)
     demo_link = db.Column(db.String(150), nullable=True)
     github_link = db.Column(db.String(150), nullable=True)
-    tags = db.relationship(
-        'Tag', secondary='project_tag', backref='projects')
+    tags = db.relationship('Tag', secondary=project_tags,
+        backref=db.backref('projects', lazy='dynamic'))
+
+    def __init__(self, *args, **kwargs):
+        super(Project, self).__init__(*args, **kwargs)
+        self.generate_slug()
+
+    def generate_slug(self):
+        self.slug = ''
+        if self.title:
+            self.slug = slugify(self.title)
+
+    def __repr__(self):
+        return '<Entry %s>' % self.title
+
 
 
 @login_manager.user_loader

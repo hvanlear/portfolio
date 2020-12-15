@@ -47,7 +47,7 @@
 
                   <h5 class="card-title project-title">{{ project.title }}</h5>
                   {% for tag in project.tags %}
-                    <a href="/tags/{{ tag.id }}" class="tags">{{tag.name}}</a>
+                      <a class='tags' href="{{ url_for('projects.project_tags_detail', slug=tag.slug) }}">{{ tag.name }}</a>
                   {% endfor %}
                   <p class="entry-content card-text project-about ">{{ project.about | safe}}</p>
                   <a class="project-source-link" href="{{ project.github_link }}"><i class="devicon devicon-github-original"></i> Source</a>

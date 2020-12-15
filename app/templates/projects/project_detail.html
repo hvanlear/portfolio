@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content_title %}All Projects{% endblock %}
+{% block content %}
+{% include "includes/project.html" %}
+<a href="{{ url_for('projects.edit', slug=project.slug) }}">Edit</a>
+{% endblock %}

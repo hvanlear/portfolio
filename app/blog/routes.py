@@ -48,6 +48,7 @@ def edit(slug):
         if form.validate_on_submit():
             post.title = form.title.data
             post.body = form.body.data
+            post.tags = form.tags.data
             db.session.add(post)
             db.session.commit()
             flash('post updated')
@@ -55,6 +56,7 @@ def edit(slug):
         elif request.method == 'GET':
             form.title.data = post.title
             form.body.data = post.body
+            form.tags.data = post.tags
     else:
         form = PostForm(obj=post)
     

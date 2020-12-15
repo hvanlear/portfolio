@@ -18,7 +18,7 @@ class TagField(wtforms.StringField):
         #filter out any empty tag names.
         tag_names = [name.strip() for name in raw_tags if name.strip()]
 
-        #query the database and tretrieve any tags we have already saved
+        #query the database and retrieve any tags we have already saved
         existing_tags = Tag.query.filter(Tag.name.in_(tag_names))
 
         #determin which tag names are new.

@@ -38,12 +38,10 @@ def create_app(config_class=Config):
         from app.blog import bp as blog_bp
         app.register_blueprint(blog_bp, url_prefix='/blog')
 
+        from app.projects import bp as projects_bp
+        app.register_blueprint(projects_bp, url_prefix='/projects')
+
         from app.admin_content import bp as admin_content_bp
         app.register_blueprint(admin_content_bp, url_prefix='/admin')
 
-        from app.admin_tag import bp as admin_tag_bp
-        app.register_blueprint(admin_tag_bp, url_prefix='/admin')
-
-
-    
     return app
