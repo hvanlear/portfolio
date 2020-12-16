@@ -22,8 +22,6 @@ project_tags = db.Table('project_tags',
 )
 
 
-
-
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
 

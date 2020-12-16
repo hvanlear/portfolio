@@ -5,7 +5,13 @@
 
 
 {{ post.body|safe }}
+{% if current_user.is_anonymous %}
+{% else %} 
 <a href="{{ url_for('blog.edit', slug=post.slug) }}">Edit</a>
+<div class="d-flex flex-row-reverse">
+  <a href="{{ url_for('blog.delete_blog_post', slug=post.slug)}}">DELETE</a>
+</div>
+{% endif %}
 <ul class="well nav nav-list">
     
     {% for tag in post.tags %}

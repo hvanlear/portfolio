@@ -4,7 +4,7 @@ from app.blog import bp
 from app.helpers import object_list
 from flask import render_template, redirect, request, url_for,flash
 from app.blog.forms import PostForm
-from flask_login import current_user
+from flask_login import current_user,login_required
 
 @bp.route('/')
 def blog_index():
@@ -25,6 +25,7 @@ def blog_tag_detail(slug):
 #add current user to the new Post route
 
 @bp.route('/create/', methods=['GET', 'POST'])
+@login_required
 def create_blog_post():
     if request.method == 'POST':
         form = PostForm(request.form)
@@ -41,6 +42,7 @@ def create_blog_post():
     return render_template('blog/create_blog_post.html', form=form)
 
 @bp.route('/<slug>/edit/', methods=['GET', 'POST'])
+@login_required
 def edit(slug):
     post = Post.query.filter(Post.slug == slug).first_or_404()
     if request.method == "POST":
@@ -66,3 +68,15 @@ def edit(slug):
 def detail(slug):
     post = Post.query.filter(Post.slug == slug).first_or_404()
     return render_template('blog/detail.html', post=post)
+
+@bp.route('/<slug>/delete/', methods=['GET', 'POST'])
+@login_required
+def delete_blog_post(slug):
+    post = Post.query.filter(Post.slug == slug).first_or_404()
+    if post is None:
+        flash('No Such Post')
+        return redirect(url_for('blog.blog_index'))
+    db.session.delete(post)
+    db.session.commit()
+    flash('post deleted')
+    return redirect(url_for('blog.blog_index'))

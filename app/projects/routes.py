@@ -4,7 +4,7 @@ from app.projects import bp
 from app.helpers import object_list
 from flask import render_template, redirect, request, url_for,flash
 from app.projects.forms import ProjectForm
-from flask_login import current_user
+from flask_login import current_user, login_user, logout_user, login_required
 
 
 @bp.route('/')
@@ -26,6 +26,7 @@ def project_tags_detail(slug):
 #add current user to the new Post route
 
 @bp.route('/create/', methods=['GET', 'POST'])
+@login_required
 def add_project():
     if request.method == 'POST':
         form = ProjectForm(request.form)
@@ -43,6 +44,7 @@ def add_project():
 
 
 @bp.route('/<slug>/edit/', methods=['GET', 'POST'])
+@login_required
 def edit(slug):
     project = Project.query.filter(Project.slug == slug).first_or_404()
     if request.method == "POST":
@@ -63,6 +65,18 @@ def edit(slug):
         form = ProjectForm(obj=project)
     
     return render_template('/projects/project_edit.html', project=project, form=form)
+
+@bp.route('/<slug>/delete/', methods=['GET', 'POST'])
+@login_required
+def delete_project(slug):
+    project = Project.query.filter(Project.slug == slug).first_or_404()
+    if project is None:
+        flash('No Such project')
+        return redirect(url_for('projects.project_index'))
+    db.session.delete(project)
+    db.session.commit()
+    flash('project deleted')
+    return redirect(url_for('projects.project_index'))
 
 @bp.route('/<slug>/')
 def detail(slug):

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content_title %}All Projects{% endblock %}
 {% block content %}
+{% if current_user.is_anonymous %}
+{% else %} 
+    <a style="color: #ffcb47;" href="{{ url_for('projects.add_project') }}">New Project</a>
+{% endif %}
 {% include "includes/project.html" %}
 {% endblock %}
