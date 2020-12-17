@@ -12,44 +12,41 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
     <link rel="stylesheet" href="https://use.typekit.net/smb2swj.css">
     <link rel="stylesheet" href="{{ url_for('static', filename="css/devicon-master/devicon.css") }}" />
+    <link rel="icon" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/mountain_26f0-fe0f.png">
 
-    <title> HVL - {% block title %}{% endblock %} </title>
+    <title> Hunter - {% block title %}{% endblock %} </title>
   </head>
   <body class='body'>
-    <div class="container mt-2">
-
-      <ul class="nav justify-content-center mr-5">
-
-        <li class="nav-item">
-
-            <a class="top-nav nav-link active" href="{{ url_for('main.index') }}">Hunter Van Lear</a> 
-        </li>
-
-        <li class="nav-item">
-            <a class=" top-nav nav-link" href="{{ url_for('projects.project_index') }}">Projects</a>
-        </li>
-
-        <li class="nav-item">
-            <a class="top-nav nav-link" href="{{ url_for('main.show_about') }}">About</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="top-nav nav-link" href="{{ url_for('blog.blog_index') }}">Blog</a>
-      </li>
-
-        <li class="nav-item">
-          <a class="top-nav nav-link" href="{{ url_for('main.contact') }}">Contact</a>
-      </li>
-
-        {% if current_user.is_anonymous %}
-          {% else %} 
+    <div class="container  mt-2">
+        <ul class="nav justify-content-center mr-5">
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-        {% endif %}
-        
 
-   
+              <a class="top-nav nav-link active" href="{{ url_for('main.index') }}">Hunter Van Lear</a> 
+          </li>
+
+          <li class="nav-item">
+              <a class=" top-nav nav-link" href="{{ url_for('projects.project_index') }}">Projects</a>
+          </li>
+
+          <li class="nav-item">
+              <a class="top-nav nav-link" href="{{ url_for('main.show_about') }}">About</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="top-nav nav-link" href="{{ url_for('blog.blog_index') }}">Blog</a>
+        </li>
+
+          <li class="nav-item">
+            <a class="top-nav nav-link" href="{{ url_for('main.contact') }}">Contact</a>
+        </li>
+
+          {% if current_user.is_anonymous %}
+            {% else %} 
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+          {% endif %}
         </ul>
+
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul>
@@ -62,11 +59,11 @@
 
 
       <main>
-        <div class="container col-md-9">
-          <h1 class="display-4 headline">{% block content_title %}{% endblock %}</h1>
+        <div class="container col-md-9 mt-4">
+          <h1 class="display-4 headline d-flex justify-content-center">{% block content_title %}{% endblock %}</h1>
           <hr class="line">
         </div>
-        <div class="container col-md-9">        
+        <div class="container col-md-9 mt-1">        
           {% block content %}CONTENT HERE{% endblock %}
           <hr class="line">
         </div>
@@ -84,9 +81,13 @@
         <li class="nav-item">
           <a class="nav-link" href="#"><i class="devicon devicon-linkedin-plain"></i></a>
         </li>
+
       </ul>
+  
     </div>
     </div>
-    
+    <div class="d-flex justify-content-center" >
+      <p id="copy">©Hunter Van Lear 2020</p>
+    </div>
   </body>
 </html>

@@ -1,19 +1,38 @@
 {% extends 'base.html' %}
 
-{% block content_title %}Welcome{% endblock %}
+{% block content_title %}Welcome!{% endblock %}
 
 {% block content %}
 
-<div class="home-body">
-  <p class = 'entry-content'>My name is <b>Hunter</b>, thank you so much for taking time out of your <span class = 'tod'></span> <span class ='timeEmoji' style="font-size: 22px"></span> to visit my
-    site </p>
+
+<svg id="stroke" xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+	<defs>
+		<path id="line" d="M2 2c49.7 2.6 50 3.1 100 1.7-46.5 2-93 4.4-139.2 7.3 45.2-1.5 90.6-1.8 135.8-.6" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+	</defs>
+</svg>
+
+
+
+<div class="home-body ">
+  <p class = 'entry-content'>My name is 
+    <span class="first-name">
+      Hunter
+      <svg class="button-stroke" viewBox="0 0 154 5">
+        <use href="#line"></use>
+      </svg>
+      <svg class="button-stroke" viewBox="0 0 154 5">
+        <use href="#line"></use>
+      </svg>
+   </span><br></p> 
   <p class='entry-content'>
+    Thank you so much for taking time out of your 
+    <span class = 'tod'></span> <span class ='timeEmoji' style="font-size: 22px"></span> to visit my site.
     I'm a Fullstack Web Developer from California, currently living in
     Emerald Isle N.C with my wife and two dogs. I designed this space as 
     somewhere I can show off my work, discuss my trade and maybe make a few observations along the way. 
   </p>
 
-  <h2 class= 'home-headline headline'>Recent Posts</h2>
+  <h2 class= 'home-headline headline d-flex justify-content-center'>Recent Posts</h2>
   <ul class = 'IndexPosts'>
     {% for post in posts %}
     <div class=" card mb-1 mt-2">
@@ -29,11 +48,7 @@
     {% endfor %}
   </ul>
 
-<!-- <div class="container col-md-9 mt-4 mb-4">
-  <hr class="line">
-</div> -->
-
-  <h2 class = 'home-headline headline'>Projects</h2>
+  <h2 class = 'home-headline headline d-flex justify-content-center'>Projects</h2>
   <div class="container-fluid">
     <legend></legend>
     <div class="row-fluid" id="main">
@@ -64,7 +79,7 @@
 
 <footer>
     <a id= 'contact_section'></a>
-    <h2 class="display-7 home-headline headline mb-2">Contact</h2>
+    <h2 class="display-7 home-headline headline mb-2 mt-3 d-flex justify-content-center">Contact</h2>
   
     <p class='entry-content'>
       I'd love to get in touch. The abolute best way to reach out would be
