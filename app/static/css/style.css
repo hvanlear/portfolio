@@ -39,6 +39,10 @@ html {
 
 /* SVG */
 
+a.top-nav.nav-link.first-name-line.first-name-line-nav {
+  min-width: 0px;
+}
+
 .first-name-line {
   display: inline-block;
   min-width: 154px;
