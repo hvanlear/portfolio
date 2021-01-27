@@ -22,8 +22,15 @@
       href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/mountain_26f0-fe0f.png"
     />
    
-
     <title>Hunter - {% block title %}{% endblock %}</title>
+
+    <svg id="stroke" xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+      <defs>
+        <path id="line" d="M2 2c49.7 2.6 50 3.1 100 1.7-46.5 2-93 4.4-139.2 7.3 45.2-1.5 90.6-1.8 135.8-.6" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      </defs>
+    </svg>
+    
+
   </head>
   <body class="body">
     <div class="container mt-2">
@@ -37,41 +44,63 @@
         <div class="top-nav-links">
           <ul class="nav justify-content-center mr-5">
             <li class="nav-item">
-              <a
-                class="top-nav nav-link active"
-                href="{{ url_for('main.index') }}"
-                >Hunter Van Lear</a
-              >
+              <a class="top-nav nav-link active first-name-line"href="{{ url_for('main.index') }}">
+                Hunter Van Lear
+                <svg class="button-stroke button-stroke-green" viewBox="0 0 154 5">
+                  <use href="#line"></use>
+                </svg>
+                <svg class="button-stroke button-stroke-green" viewBox="0 0 154 5">
+                  <use href="#line"></use>
+                </svg>
+                </a>
             </li>
 
             <li class="nav-item">
-              <a
-                class="top-nav nav-link"
-                href="{{ url_for('projects.project_index') }}"
-                >Projects</a
-              >
+              <a class="top-nav nav-link first-name-line" href="{{ url_for('projects.project_index') }}">
+                Projects
+                <svg class="button-stroke button-stroke-green" viewBox="0 0 154 5">
+                  <use href="#line"></use>
+                </svg>
+                <svg class="button-stroke button-stroke-green" viewBox="0 0 154 5">
+                  <use href="#line"></use>
+                </svg>
+              </a>
             </li>
 
             <li class="nav-item">
-              <a
-                class="top-nav nav-link"
-                href="{{ url_for('main.show_about') }}"
-                >About</a
-              >
+              <a class="top-nav nav-link first-name-line" href="{{ url_for('main.show_about') }}">
+                About
+                <svg class="button-stroke button-stroke-green" viewBox="0 0 154 5">
+                  <use href="#line"></use>
+                </svg>
+                <svg class="button-stroke button-stroke-green" viewBox="0 0 154 5">
+                  <use href="#line"></use>
+                </svg>
+              </a>
             </li>
 
             <li class="nav-item">
-              <a
-                class="top-nav nav-link"
-                href="{{ url_for('blog.blog_index') }}"
-                >Blog</a
-              >
+              <a class="top-nav nav-link first-name-line" href="{{ url_for('blog.blog_index') }}">
+                Blog
+                <svg class="button-stroke button-stroke-green" viewBox="0 0 154 5">
+                  <use href="#line"></use>
+                </svg>
+                <svg class="button-stroke button-stroke-green" viewBox="0 0 154 5">
+                  <use href="#line"></use>
+                </svg>
+              </a>
             </li>
 
             <li class="nav-item">
-              <a class="top-nav nav-link" href="{{ url_for('main.contact') }}"
-                >Contact</a
-              >
+              <a class="top-nav nav-link first-name-line" href="{{ url_for('main.contact') }}">
+                Contact
+                <svg class="button-stroke button-stroke-green" viewBox="0 0 154 5">
+                  <use href="#line"></use>
+                </svg>
+                <svg class="button-stroke button-stroke-green" viewBox="0 0 154 5">
+                  <use href="#line"></use>
+                </svg>
+              </a>
             </li>
 
             {% if current_user.is_anonymous %} {% else %}

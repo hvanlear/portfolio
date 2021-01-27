@@ -32,18 +32,21 @@ html {
   border-radius: 10px;
 }
 
+.first-name {
+  font-weight: bold;
+  color: white;
+}
+
 /* SVG */
 
-.first-name {
+.first-name-line {
   display: inline-block;
-  color: white;
   min-width: 154px;
   text-decoration: none;
   position: relative;
-  font-weight: bold;
 }
 
-.first-name:hover .button-stroke:nth-child(2) {
+.first-name-line:hover .button-stroke:nth-child(2) {
   animation: strokeAnimation 1s ease-out;
   stroke-dashoffset: 0;
 }
@@ -58,14 +61,23 @@ html {
   transition: stroke-dashoffset 900ms ease-out;
 }
 
+.button-stroke-green {
+  stroke: #00bc8c;
+  height: 10px;
+  width: calc(100% - 50px);
+}
+
+.button-stroke-yellow {
+  stroke: #ffcb47;
+  bottom: -4px;
+  height: 10px;
+  width: calc(100% - 40px);
+}
+
 .button-stroke {
   display: block;
-  width: calc(100% - 40px);
-  height: 10px;
-  stroke: #ffcb47;
   position: absolute;
   stroke-width: 2;
-  bottom: -4px;
 }
 
 /* SVG END */
@@ -344,11 +356,16 @@ main {
     text-align: center;
   }
 
-  .top-nav-links ul li a {
-    padding: 0.5rem 1rem;
+  .nav-link {
+    padding: 0.5rem;
   }
 
   .top-nav-links.active {
     display: flex;
+  }
+
+  .button-stroke-green {
+    height: 6px;
+    width: calc(100% - 33px);
   }
 }
