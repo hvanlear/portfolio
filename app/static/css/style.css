@@ -214,6 +214,10 @@ h2 {
   opacity: 1;
 }
 
+.project-source-link {
+  padding: 10px;
+}
+
 .top-nav,
 .project-source-link {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,

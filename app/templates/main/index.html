@@ -65,7 +65,9 @@
                       <a class='tags' href="{{ url_for('projects.project_tags_detail', slug=tag.slug) }}">{{ tag.name }}</a>
                   {% endfor %}
                   <p class="entry-content card-text project-about ">{{ project.about | safe}}</p>
-                  <a class="project-source-link" href="{{ project.github_link }}"><i class="devicon devicon-github-original"></i> Source</a>
+                  <a class="project-source-link" href="{{ project.github_link }}" target="_blank"><i class="devicon devicon-github-original"></i> Source</a>
+                  <a class="project-source-link" href="{{ project.demo_link }}" target="_blank"> Live Demo</a>
+                  
                 
               </div>
               </div>

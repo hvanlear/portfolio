@@ -20,11 +20,18 @@
     <p class="entry-content card-text project-about">
       {{ project.about | safe}}
     </p>
-    <a class="project-source-link" href="{{ project.github_link }}"
+    <a
+      class="project-source-link"
+      href="{{ project.github_link }}"
+      target="_blank"
       ><i class="devicon devicon-github-original"></i> Source</a
     >
 
-    <a class="project-source-link" href="{{ project.demo_link }}">
+    <a
+      class="project-source-link"
+      href="{{ project.demo_link }}"
+      target="_blank"
+    >
       Live Demo
     </a>
   </div>
