@@ -1,19 +1,31 @@
 {% for project in object_list.items %}
-<div class='card mt-2'>
-    <div class="card-body">
-      {% if current_user.is_anonymous %}
-      {% else %} 
-        <a href="{{ url_for('projects.edit', slug=project.slug) }}">Edit</a>
-        <div class="d-flex flex-row-reverse">
-          <a href="{{ url_for('projects.delete_project', slug=project.slug)}}">DELETE</a>
-        </div>
-      {% endif %}
-      <h5 class="card-title project-title">{{ project.title }}</h5>
-      {% for tag in project.tags %}
-      <a class='tags' href="{{ url_for('projects.project_tags_detail', slug=tag.slug) }}">{{ tag.name }}</a>
-      {% endfor %}
-      <p class="entry-content card-text project-about ">{{ project.about | safe}}</p>
-      <a class="project-source-link" href="{{ project.github_link }}"><i class="devicon devicon-github-original"></i> Source</a>
+<div class="card mt-2">
+  <div class="card-body">
+    {% if current_user.is_anonymous %} {% else %}
+    <a href="{{ url_for('projects.edit', slug=project.slug) }}">Edit</a>
+    <div class="d-flex flex-row-reverse">
+      <a href="{{ url_for('projects.delete_project', slug=project.slug)}}"
+        >DELETE</a
+      >
+    </div>
+    {% endif %}
+    <h5 class="card-title project-title">{{ project.title }}</h5>
+    {% for tag in project.tags %}
+    <a
+      class="tags"
+      href="{{ url_for('projects.project_tags_detail', slug=tag.slug) }}"
+      >{{ tag.name }}</a
+    >
+    {% endfor %}
+    <p class="entry-content card-text project-about">
+      {{ project.about | safe}}
+    </p>
+    <a class="project-source-link" href="{{ project.github_link }}"
+      ><i class="devicon devicon-github-original"></i> Source</a
+    >
+    <a class="project-source-link" href="{{ project.demo_link }}"
+      ><i class="devicon devicon-github-original"></i> Live Demo</a
+    >
   </div>
-  </div>
+</div>
 {% endfor %}
