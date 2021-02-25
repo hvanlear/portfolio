@@ -12,6 +12,12 @@ html {
   }
 }
 
+* {
+  font-family: "Inter var", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /* NAV Responsive */
 
 .toggle-button {
@@ -85,12 +91,6 @@ a.top-nav.nav-link.first-name-line.first-name-line-nav {
 }
 
 /* SVG END */
-
-* {
-  font-family: "Inter var", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 .body {
   background-color: #0d1117;
