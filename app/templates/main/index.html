@@ -37,12 +37,14 @@
     {% for post in posts %}
     <div class=" card mb-1 mt-2">
       <div class="post-card card-body">
-        <h4 class="postTitle">{{post.title}}</h4>
+        <h4 class="postTitle"><a href="{{ url_for('blog.detail', slug=post.slug) }}">{{ post.title }}</a></h4>
+        <div class="tag-container">
         {% for tag in post.tags %}
           <a href="{{ url_for('blog.blog_tag_detail', slug=tag.slug) }}" class="tags">{{tag.name}}</a>
         {% endfor %}
+      </div>
         <p class='display-date'>{{ post.create_date }}</p>
-        <p class="text-muted">- {{ post.author.username}}</p>
+        <p class="text-muted">- Hunter</p>
       </div>
     </div>
     {% endfor %}
