@@ -156,6 +156,9 @@
     <div class="d-flex justify-content-center">
       <p id="copy">©Hunter Van Lear 2021</p>
     </div>
-  
+    {% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
+    <script src="{{ url_for('static', filename="js/dateFormat.js") }}"></script>
+    {% endblock %}
   </body>
 </html>
