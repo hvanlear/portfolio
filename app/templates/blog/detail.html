@@ -14,9 +14,11 @@
 </div>
 {% endif %}
 <ul class="well nav nav-list">
+  
   <div class="tag-container">
     {% for tag in post.tags %}
     <a class='tags' href="{{ url_for('blog.blog_tag_detail', slug=tag.slug) }}">{{ tag.name }}</a>
+   
   {% endfor %}
 </div>
 </ul>
