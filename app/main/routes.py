@@ -29,5 +29,4 @@ def show_about():
 
 @bp.route('/resume')
 def show_resume():
-
-    return send_file('static/assets/resume.pdf', attachment_filename='resume.pdf')
+    return send_file('static/assets/hresume.pdf', attachment_filename='hresume.pdf')
