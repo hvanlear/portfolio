@@ -1,5 +1,6 @@
 /* Base Colors:  */
 /* #00a896
+#0d1117
 #f5c936 */
 
 @import url("https://rsms.me/inter/inter.css");
@@ -94,8 +95,8 @@ a.top-nav.nav-link.first-name-line.first-name-line-nav {
 /* SVG END */
 
 .body {
-  /* background-color: #0d1117; */
-  background-color: #242629;
+  background-color: #181f2b;
+  /* background-color: #242629; */
 }
 
 img {
