@@ -53,7 +53,7 @@
 
   <h2 class = 'home-headline headline d-flex'>Projects</h2>
   <div class="container-fluid">
-    <p class="text-muted">NOTE* Most of these projects are hosted on a free heroku account, if viewing the live demo please allow time for the web server to wake</p>
+    <p class="text-muted">NOTE* Some projects are hosted on a free heroku account, if viewing the live demo please allow time for the web server to wake</p>
     <legend></legend>
     <div class="row-fluid" id="main">
         {% for project in projects %}
@@ -70,7 +70,12 @@
                   {% endfor %}
                   <p class="entry-content card-text project-about ">{{ project.about | safe}}</p>
                   <a class="project-source-link" href="{{ project.github_link }}" target="_blank"><i class="devicon devicon-github-original"></i> Source</a>
-                  <a class="project-source-link" href="{{ project.demo_link }}" target="_blank"> Live Demo</a>
+               
+                  {% if project.demo_link != "" %}
+                  <a class="project-source-link" href="{{ project.demo_link }}" target="_blank">Live Demo</a>
+            
+                  {% endif %}
+                  
                   
                 
               </div>

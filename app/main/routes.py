@@ -11,6 +11,9 @@ from werkzeug.urls import url_parse
 def index():
     posts = Post.query.order_by(Post.create_date.desc()).limit(2).all()
     projects = Project.query.all()
+    for pr in projects:
+        if pr.demo_link == "":
+            print('hello')
     return render_template('main/index.html', title='Home', posts=posts, projects=projects)
 
 

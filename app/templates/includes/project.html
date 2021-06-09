@@ -26,7 +26,7 @@
       target="_blank"
       ><i class="devicon devicon-github-original"></i> Source</a
     >
-
+    {% if project.demo_link != "" %}
     <a
       class="project-source-link"
       href="{{ project.demo_link }}"
@@ -34,6 +34,8 @@
     >
       Live Demo
     </a>
+
+    {% endif %}
   </div>
 </div>
 {% endfor %}
